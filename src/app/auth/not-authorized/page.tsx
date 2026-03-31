@@ -12,7 +12,7 @@ export default function NotAuthorized() {
 
         <div className="w-full h-40 mb-4 overflow-hidden rounded-lg">
           <img
-            src="public/alert.jpg"
+            src="/alert.jpg"
             alt="not authorized"
             className="w-full h-full object-cover"
           />
