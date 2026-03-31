@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 import './globals.css';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata: Metadata = {
   title: 'Auth System',
@@ -13,17 +14,14 @@ export default function RootLayout({ children }: {
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex items-center justify-center p-4">
+      <body className="min-h-screen">
         {children}
+        
         <ToastContainer
-          position="top-center"
-          autoClose={5000}
+          position="top-right"
+          autoClose={2000}
           hideProgressBar={false}
-          newestOnTop={false}
           closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
           pauseOnHover
           theme="light"
           toastStyle={{
