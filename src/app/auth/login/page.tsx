@@ -102,12 +102,12 @@ const LoginPage = () => {
     localStorage.setItem("isLogin", "true");
 
     toast.success('Login Berhasil!', {
-      autoClose: 1500,
+      theme: 'dark',
+      position: 'top-right'
     });
 
-    setTimeout(() => {
-      router.push('/home');
-    }, 1500);
+    router.push('/home');
+  };
 
   return (
     <AuthFormWrapper title="Login">
