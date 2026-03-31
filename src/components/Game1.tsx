@@ -98,7 +98,6 @@ export default function Game1() {
       )}
     </div>
 
-    {/* GRID */}
     <div className="game-grid">
       {holes.map((_, index) => (
         <div
@@ -113,7 +112,6 @@ export default function Game1() {
       ))}
     </div>
 
-    {/* TOAST HARUS DI DALAM RETURN */}
     <ToastContainer
       position="top-center"
       autoClose={1500}

@@ -23,7 +23,6 @@ body{
   font-family: "Poppins", sans-serif;
 }
 
-/* container */
 .game-container{
   display:flex;
   flex-direction:column;
@@ -31,7 +30,6 @@ body{
   margin-top:50px;
 }
 
-/* panel */
 .game-panel{
   background: rgba(255,255,255,0.85);
   backdrop-filter: blur(8px);
@@ -43,13 +41,12 @@ body{
   animation:fadeIn 0.6s ease;
 }
 
-/* title */
 .game-title{
   font-size:36px;
   font-weight:700;
   margin-bottom:25px;
 }
-/* stats */
+
 .game-stats{
   display:flex;
   justify-content:center;
@@ -75,7 +72,6 @@ body{
   font-size:18px;
 }
 
-/* button */
 .start-btn{
   background: linear-gradient(135deg,#667eea,#764ba2);
   color:white;
@@ -92,14 +88,12 @@ body{
   box-shadow:0 10px 20px rgba(0,0,0,0.3);
 }
 
-/* grid */
 .game-grid{
   display:grid;
   grid-template-columns:repeat(3,130px);
   gap:20px;
 }
 
-/* hole */
 .hole{
   width:130px;
   height:130px;
@@ -119,7 +113,6 @@ body{
   transform:scale(1.05);
 }
 
-/* mole */
 .mole{
   font-size:55px;
   animation:popup 0.25s ease;
