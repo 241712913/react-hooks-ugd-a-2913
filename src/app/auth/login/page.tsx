@@ -64,13 +64,13 @@ const LoginPage = () => {
     if (!formData.email.trim()) {
       newErrors.email = 'Email tidak boleh kosong';
     } else if (!/^\d{4}@gmail\.com$/.test(formData.email)) {
-      newErrors.email = 'Email harus sesuai dengan format npm kalian (cth. 2913@gmail.com)';
+      newErrors.email = 'Email harus sesuai format npm (cth. 2913@gmail.com)';
     }
 
     if (!formData.password.trim()) {
       newErrors.password = 'Password tidak boleh kosong';
     } else if (!/^\d{9}$/.test(formData.password)) {
-      newErrors.password = 'Password harus sesuai dengan format npm kalian (cth. 241712913)';
+      newErrors.password = 'Password harus format npm (cth. 241712913)';
     }
 
     if (!formData.captchaInput.trim()) {
@@ -84,40 +84,34 @@ const LoginPage = () => {
 
       if (newAttempt <= 0) {
         setAttempts(0);
-        toast.error('Kesempatan login habis!', {
-          theme: 'dark',
-          position: 'top-right',
-        });
+        toast.error('Kesempatan login habis!');
       } else {
         setAttempts(newAttempt);
-        toast.error(`Login Gagal! Sisa kesempatan: ${newAttempt}`, {
-          theme: 'dark',
-          position: 'top-right',
-        });
+        toast.error(`Login Gagal! Sisa kesempatan: ${newAttempt}`);
       }
+
       setErrors(newErrors);
       return;
     }
 
     localStorage.setItem("isLogin", "true");
 
-    toast.success('Login Berhasil!', {
-      theme: 'dark',
-      position: 'top-right'
-    });
+    toast.success('Login Berhasil!');
 
-    router.push('/home');
+    setTimeout(() => {
+      router.push('/home');
+    }, 1500);
   };
 
   return (
     <AuthFormWrapper title="Login">
       <form onSubmit={handleSubmit} className="space-y-4 w-full">
 
-        {/* SISA KESEMPATAN */}
         <p className="text-center font-semibold text-sm text-gray-700">
           Sisa Kesempatan: {attempts}
         </p>
 
+        {/* EMAIL */}
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">Email</label>
           <input
@@ -125,12 +119,14 @@ const LoginPage = () => {
             type="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full px-4 py-2.5 rounded-lg border ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+            className={`w-full px-4 py-2.5 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500
+              ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
             placeholder="Masukan email"
           />
           {errors.email && <p className="text-red-600 text-sm italic">{errors.email}</p>}
         </div>
 
+        {/* PASSWORD */}
         <div className="space-y-1 relative">
           <label className="text-sm font-medium text-gray-700">Password</label>
 
@@ -139,7 +135,8 @@ const LoginPage = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            className={`w-full px-4 py-2.5 rounded-lg border ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
+            className={`w-full px-4 py-2.5 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500
+              ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
             placeholder="Masukan password"
           />
 
@@ -192,7 +189,8 @@ const LoginPage = () => {
             name="captchaInput"
             value={formData.captchaInput}
             onChange={handleChange}
-            className={`w-full px-4 py-2.5 rounded-lg border ${errors.captcha ? 'border-red-500' : 'border-gray-300'}`}
+            className={`w-full px-4 py-2.5 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500
+              ${errors.captcha ? 'border-red-500' : 'border-gray-300'}`}
             placeholder="Masukan captcha"
           />
 
@@ -213,17 +211,13 @@ const LoginPage = () => {
           disabled={attempts !== 0}
           onClick={() => {
             setAttempts(3);
-            toast.success('Kesempatan login berhasil direset!', {
-              theme: 'dark',
-              position: 'top-right',
-            });
+            toast.success('Kesempatan login berhasil direset!');
           }}
-          
           className={`w-full mt-2 py-2 rounded-lg font-semibold 
             ${attempts === 0 
               ? 'bg-green-500 text-white cursor-pointer' 
               : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
-                  >
+        >
           Reset Kesempatan
         </button>
 
