@@ -61,52 +61,64 @@ const LoginPage = () => {
 
     const newErrors: ErrorObject = {};
 
+    // 🔴 EMAIL VALIDATION (FORMAT NPM)
     if (!formData.email.trim()) {
       newErrors.email = 'Email tidak boleh kosong';
     } else if (!/^\d{4}@gmail\.com$/.test(formData.email)) {
-      newErrors.email = 'Email harus sesuai format npm (cth. 2913@gmail.com)';
+      newErrors.email = 'Email harus sesuai dengan format npm kalian (cth. 2913@gmail.com)';
     }
 
+    // 🔴 PASSWORD VALIDATION (FORMAT NPM)
     if (!formData.password.trim()) {
       newErrors.password = 'Password tidak boleh kosong';
     } else if (!/^\d{9}$/.test(formData.password)) {
-      newErrors.password = 'Password harus format npm (cth. 241712913)';
+      newErrors.password = 'Password harus sesuai dengan format npm kalian (cth. 241712913)';
     }
 
+    // 🔴 CAPTCHA VALIDATION
     if (!formData.captchaInput.trim()) {
       newErrors.captcha = 'Captcha belum diisi';
     } else if (formData.captchaInput !== captcha) {
       newErrors.captcha = 'Captcha tidak valid';
     }
 
+    // 🔥 HANDLE ERROR + ATTEMPTS
     if (Object.keys(newErrors).length > 0) {
       const newAttempt = attempts - 1;
 
       if (newAttempt <= 0) {
         setAttempts(0);
-        toast.error('Kesempatan login habis!');
+        toast.error('Kesempatan login habis!', {
+          theme: 'dark',
+          position: 'top-right',
+        });
       } else {
         setAttempts(newAttempt);
-        toast.error(`Login Gagal! Sisa kesempatan: ${newAttempt}`);
+        toast.error(`Login Gagal! Sisa kesempatan: ${newAttempt}`, {
+          theme: 'dark',
+          position: 'top-right',
+        });
       }
-
       setErrors(newErrors);
       return;
     }
 
+    // ✅ LOGIN BERHASIL
     localStorage.setItem("isLogin", "true");
 
-    toast.success('Login Berhasil!');
+    toast.success('Login Berhasil!', {
+      theme: 'dark',
+      position: 'top-right'
+    });
 
-    setTimeout(() => {
-      router.push('/home');
-    }, 1500);
+    router.push('/home');
   };
 
   return (
     <AuthFormWrapper title="Login">
       <form onSubmit={handleSubmit} className="space-y-4 w-full">
 
+        {/* SISA KESEMPATAN */}
         <p className="text-center font-semibold text-sm text-gray-700">
           Sisa Kesempatan: {attempts}
         </p>
@@ -119,8 +131,7 @@ const LoginPage = () => {
             type="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full px-4 py-2.5 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500
-              ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+            className={`w-full px-4 py-2.5 rounded-lg border ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
             placeholder="Masukan email"
           />
           {errors.email && <p className="text-red-600 text-sm italic">{errors.email}</p>}
@@ -135,11 +146,11 @@ const LoginPage = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            className={`w-full px-4 py-2.5 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500
-              ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
+            className={`w-full px-4 py-2.5 rounded-lg border ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
             placeholder="Masukan password"
           />
 
+          {/* ICON MATA */}
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
@@ -150,6 +161,7 @@ const LoginPage = () => {
 
           {errors.password && <p className="text-red-600 text-sm italic">{errors.password}</p>}
 
+          {/* 🔥 PINDAH KE SINI */}
           <div className="flex justify-between items-center mt-1">
             <label className="flex items-center text-sm text-gray-700">
               <input
@@ -167,6 +179,7 @@ const LoginPage = () => {
           </div>
         </div>
 
+        {/* CAPTCHA */}
         <div className="space-y-2">
           <div className="flex items-center gap-3">
             <span className="text-sm font-medium">Captcha:</span>
@@ -189,14 +202,14 @@ const LoginPage = () => {
             name="captchaInput"
             value={formData.captchaInput}
             onChange={handleChange}
-            className={`w-full px-4 py-2.5 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500
-              ${errors.captcha ? 'border-red-500' : 'border-gray-300'}`}
+            className={`w-full px-4 py-2.5 rounded-lg border ${errors.captcha ? 'border-red-500' : 'border-gray-300'}`}
             placeholder="Masukan captcha"
           />
 
           {errors.captcha && <p className="text-red-600 text-sm italic">{errors.captcha}</p>}
         </div>
 
+        {/* BUTTON LOGIN */}
         <button
           type="submit"
           disabled={attempts === 0}
@@ -206,17 +219,19 @@ const LoginPage = () => {
           Sign In
         </button>
 
+        {/* RESET */}
         <button
           type="button"
           disabled={attempts !== 0}
           onClick={() => {
             setAttempts(3);
-            toast.success('Kesempatan login berhasil direset!');
+            toast.success('Kesempatan login berhasil direset!', {
+              theme: 'dark',
+              position: 'top-right',
+            });
           }}
           className={`w-full mt-2 py-2 rounded-lg font-semibold 
-            ${attempts === 0 
-              ? 'bg-green-500 text-white cursor-pointer' 
-              : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+            ${attempts === 0 ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-500'}`}
         >
           Reset Kesempatan
         </button>
