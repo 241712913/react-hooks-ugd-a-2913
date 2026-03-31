@@ -14,15 +14,17 @@ export default function RootLayout({ children }: {
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen">
-        {children}
+      <body className="min-h-screen flex items-center justify-center">
         
+        {children}
+
         <ToastContainer
-          position="top-right"
+          position="top-center"   
           autoClose={2000}
           hideProgressBar={false}
           closeOnClick
           pauseOnHover
+          draggable
           theme="light"
           toastStyle={{
             borderRadius: '8px',
