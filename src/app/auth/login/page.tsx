@@ -7,6 +7,7 @@ import SocialAuth from '../../../components/SocialAuth';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
 import { FaEye, FaEyeSlash, FaSyncAlt } from 'react-icons/fa';
+import { set } from 'mongoose';
 
 interface LoginFormData {
   email: string;
@@ -111,7 +112,9 @@ const LoginPage = () => {
       position: 'top-right'
     });
 
-    router.push('/home');
+    setTimeout(() => {
+      router.push('/home');
+    }, 1500);
   };
 
   return (
@@ -231,7 +234,9 @@ const LoginPage = () => {
             });
           }}
           className={`w-full mt-2 py-2 rounded-lg font-semibold 
-            ${attempts === 0 ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-500'}`}
+            ${attempts === 0 
+              ? 'bg-green-500 text-white cursor-pointer' 
+              : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
         >
           Reset Kesempatan
         </button>
