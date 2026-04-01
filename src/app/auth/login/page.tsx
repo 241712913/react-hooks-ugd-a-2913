@@ -99,7 +99,7 @@ const LoginPage = () => {
       return;
     }
 
-    localStorage.removeItem("islogin");
+    localStorage.setItem("isLogin", "true");
 
     toast.success('Login Berhasil!', {
       theme: 'dark',
