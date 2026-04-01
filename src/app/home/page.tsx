@@ -12,15 +12,14 @@ export default function Home() {
     const isLogin = localStorage.getItem("isLogin");
 
     if (isLogin === "true") {
-      setIsAllowed(true);        // izinkan tampil game
+      setIsAllowed(true);        
     } else {
       router.replace('/auth/not-authorized');
     }
   }, [router]);
 
-  // Kalau belum dikonfirmasi login, jangan render Game1 sama sekali
   if (!isAllowed) {
-    return null;                 // ← ini yang membuat tidak ada flash
+    return null; 
   }
 
   return (
