@@ -18,7 +18,6 @@ type RegisterFormData = {
   captcha: string;
 };
 
-// CAPTCHA RANDOM
 const generateCaptcha = () => {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
@@ -44,7 +43,6 @@ const RegisterPage = () => {
 
   const password = watch('password', '');
 
-
   useEffect(() => {
     const strength = Math.min(
       (password.length > 7 ? 25 : 0) +
@@ -56,7 +54,6 @@ const RegisterPage = () => {
     setStrength(strength);
   }, [password]);
 
-  // 🎨 WARNA
   const getColor = () => {
     if (strength === 25) return 'bg-red-500';
     if (strength === 50 || strength === 75) return 'bg-yellow-400';
@@ -80,7 +77,6 @@ const RegisterPage = () => {
     <AuthFormWrapper title="Register">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full">
 
-        {/* USERNAME */}
         <div className="space-y-1">
           <label className="text-sm font-medium">
             Username <span className="text-xs text-gray-500">(max 8 karakter)</span>
@@ -99,7 +95,6 @@ focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-blue-800 transi
           {errors.username && <p className="text-red-500 text-sm">{errors.username.message}</p>}
         </div>
 
-        {/* EMAIL */}
         <div className="space-y-1">
           <label className="text-sm font-medium">Email</label>
           <input
@@ -118,7 +113,6 @@ focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-blue-800 transi
           {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
         </div>
 
-        {/* NOMOR TELP */}
         <div className="space-y-1">
           <label className="text-sm font-medium">Nomor Telepon</label>
           <input
@@ -139,7 +133,6 @@ focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-blue-800 transi
           {errors.nomorTelp && <p className="text-red-500 text-sm">{errors.nomorTelp.message}</p>}
         </div>
 
-        {/* PASSWORD */}
         <div className="space-y-1 relative">
           <label className="text-sm font-medium">Password</label>
 
@@ -154,7 +147,6 @@ focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-blue-800 transi
             placeholder="Masukkan password"
           />
 
-          {/* ICON MATA */}
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
@@ -163,7 +155,6 @@ focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-blue-800 transi
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
 
-          {/* 🔥 STRENGTH MUNCUL HANYA SAAT ADA INPUT */}
           {password && (
             <>
               <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
@@ -181,8 +172,7 @@ focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-blue-800 transi
 
           {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
         </div>
-        
-        {/* CONFIRM PASSWORD */}
+
         <div className="space-y-1">
           <label className="text-sm font-medium">Konfirmasi Password</label>
           
@@ -199,7 +189,6 @@ focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-blue-800 transi
               placeholder="Masukkan ulang password"
             />
 
-            {/* ICON MATA */}
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
@@ -209,7 +198,6 @@ focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-blue-800 transi
             </button>
           </div>
 
-          {/* Strength Meter - Muncul hanya setelah ketik di confirm password */}
           {watch('confirmPassword') && (
             <>
               <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
@@ -227,7 +215,6 @@ focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-blue-800 transi
           {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword.message}</p>}
         </div>
 
-        {/* CAPTCHA */}
         <div className="space-y-2">
           <div className="flex items-center gap-3">
             <span className="text-sm font-medium">Captcha:</span>
@@ -256,7 +243,6 @@ focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-blue-800 transi
           {errors.captcha && <p className="text-red-500 text-sm">{errors.captcha.message}</p>}
         </div>
 
-        {/* BUTTON */}
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-2.5 rounded-lg"
@@ -266,7 +252,6 @@ focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-blue-800 transi
 
         <SocialAuth />
 
-        {/* LOGIN LINK */}
         <p className="text-center text-sm">
           Sudah punya akun?{' '}
           <Link href="/auth/login" className="text-blue-600 font-bold">

@@ -67,21 +67,18 @@ const LoginPage = () => {
       newErrors.email = 'Email harus sesuai dengan format npm kalian (cth. 2913@gmail.com)';
     }
 
-    // 🔴 PASSWORD VALIDATION (FORMAT NPM)
     if (!formData.password.trim()) {
       newErrors.password = 'Password tidak boleh kosong';
     } else if (!/^\d{9}$/.test(formData.password)) {
       newErrors.password = 'Password harus sesuai dengan format npm kalian (cth. 241712913)';
     }
 
-    // 🔴 CAPTCHA VALIDATION
     if (!formData.captchaInput.trim()) {
       newErrors.captcha = 'Captcha belum diisi';
     } else if (formData.captchaInput !== captcha) {
       newErrors.captcha = 'Captcha tidak valid';
     }
 
-    // 🔥 HANDLE ERROR + ATTEMPTS
     if (Object.keys(newErrors).length > 0) {
       const newAttempt = attempts - 1;
 
@@ -102,7 +99,6 @@ const LoginPage = () => {
       return;
     }
 
-    // ✅ LOGIN BERHASIL
     localStorage.setItem("isLogin", "true");
 
     toast.success('Login Berhasil!', {
@@ -119,12 +115,10 @@ const LoginPage = () => {
     <AuthFormWrapper title="Login">
       <form onSubmit={handleSubmit} noValidate className="space-y-4 w-full">
 
-        {/* SISA KESEMPATAN */}
         <p className="text-center font-semibold text-sm text-gray-700">
           Sisa Kesempatan: {attempts}
         </p>
 
-        {/* EMAIL */}
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">Email</label>
           <input
@@ -138,7 +132,6 @@ const LoginPage = () => {
           {errors.email && <p className="text-red-600 text-sm italic">{errors.email}</p>}
         </div>
 
-        {/* PASSWORD */}
         <div className="space-y-1 relative">
           <label className="text-sm font-medium text-gray-700">Password</label>
 
@@ -151,7 +144,6 @@ const LoginPage = () => {
             placeholder="Masukan password"
           />
 
-          {/* ICON MATA */}
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
@@ -162,7 +154,6 @@ const LoginPage = () => {
 
           {errors.password && <p className="text-red-600 text-sm italic">{errors.password}</p>}
 
-          {/* 🔥 PINDAH KE SINI */}
           <div className="flex justify-between items-center mt-1">
             <label className="flex items-center text-sm text-gray-700">
               <input
@@ -180,7 +171,6 @@ const LoginPage = () => {
           </div>
         </div>
 
-        {/* CAPTCHA */}
         <div className="space-y-2">
           <div className="flex items-center gap-3">
             <span className="text-sm font-medium">Captcha:</span>
@@ -210,7 +200,6 @@ const LoginPage = () => {
           {errors.captcha && <p className="text-red-600 text-sm italic">{errors.captcha}</p>}
         </div>
 
-        {/* BUTTON LOGIN */}
         <button
           type="submit"
           disabled={attempts === 0}
@@ -220,12 +209,11 @@ const LoginPage = () => {
           Sign In
         </button>
 
-        {/* RESET */}
         <button
           type="button"
           disabled={attempts !== 0}
           onClick={() => {
-            setAttempts(3);                    // ini tetap
+            setAttempts(3);                    
             toast.success('Kesempatan login berhasil direset!', {
               theme: 'dark',
               position: 'top-right',

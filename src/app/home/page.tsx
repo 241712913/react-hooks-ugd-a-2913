@@ -6,22 +6,24 @@ import Game1 from "../../components/Game1";
 
 export default function Home() {
   const router = useRouter();
-  const [isAllowed, setIsAllowed] = useState(false);   // tambahan ini
+  const [isAllowed, setIsAllowed] = useState(false);
+  const [checking, setChecking] = useState(true); 
 
   useEffect(() => {
     const isLogin = localStorage.getItem("isLogin");
 
-    if (isLogin === "true") {
-      setIsAllowed(true);        // izinkan tampil game
+    if (isLogin) {
+      setIsAllowed(true);
     } else {
       router.replace('/auth/not-authorized');
     }
+
+    setChecking(false);
   }, [router]);
 
-  // Kalau belum dikonfirmasi login, jangan render Game1 sama sekali
-  if (!isAllowed) {
-    return null;                 // ← ini yang membuat tidak ada flash
-  }
+  if (checking) return null;
+
+  if (!isAllowed) return null;
 
   return (
     <div className="flex items-center justify-center min-h-screen">
