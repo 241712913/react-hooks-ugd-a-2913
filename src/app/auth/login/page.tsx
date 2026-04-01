@@ -61,10 +61,9 @@ const LoginPage = () => {
 
     const newErrors: ErrorObject = {};
 
-    // 🔴 EMAIL VALIDATION (FORMAT NPM)
     if (!formData.email.trim()) {
       newErrors.email = 'Email tidak boleh kosong';
-    } else if (!/^\d{4}@gmail\.com$/.test(formData.email)) {
+    } else if (!formData.email.includes('@') || !/^\d{4}@gmail\.com$/.test(formData.email)) {
       newErrors.email = 'Email harus sesuai dengan format npm kalian (cth. 2913@gmail.com)';
     }
 
@@ -118,7 +117,7 @@ const LoginPage = () => {
 
   return (
     <AuthFormWrapper title="Login">
-      <form onSubmit={handleSubmit} className="space-y-4 w-full">
+      <form onSubmit={handleSubmit} noValidate className="space-y-4 w-full">
 
         {/* SISA KESEMPATAN */}
         <p className="text-center font-semibold text-sm text-gray-700">
@@ -130,7 +129,7 @@ const LoginPage = () => {
           <label className="text-sm font-medium text-gray-700">Email</label>
           <input
             name="email"
-            type="email"
+            type="text"
             value={formData.email}
             onChange={handleChange}
             className={`w-full px-4 py-2.5 rounded-lg border ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
