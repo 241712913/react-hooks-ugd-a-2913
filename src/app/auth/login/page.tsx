@@ -7,7 +7,6 @@ import SocialAuth from '../../../components/SocialAuth';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
 import { FaEye, FaEyeSlash, FaSyncAlt } from 'react-icons/fa';
-import { set } from 'mongoose';
 
 interface LoginFormData {
   email: string;

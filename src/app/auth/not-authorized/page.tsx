@@ -6,11 +6,11 @@ export default function NotAuthorized() {
   const router = useRouter();   // ← Hook harus dipanggil di dalam component
 
   return (
-    <div className="flex items-center justify-center h-screen w-full bg-gradient-to-r from-blue-400 to-blue-600">
+    <div className="flex items-center justify-center h-screen w-full to-blue-600">
       <div className="bg-white/30 backdrop-blur-lg rounded-2xl p-6 w-[380px] max-w-[90%] text-center shadow-lg">
         <div className="w-full h-40 mb-4 overflow-hidden rounded-lg">
           <img
-            src="/images/gambar.jpg"
+            src="/gambar.jpg"
             alt="not authorized"
             className="w-full h-full object-cover"
           />
