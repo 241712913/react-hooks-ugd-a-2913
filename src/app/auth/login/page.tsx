@@ -227,16 +227,17 @@ const LoginPage = () => {
           type="button"
           disabled={attempts !== 0}
           onClick={() => {
-            setAttempts(3);
+            setAttempts(3);                    // ini tetap
             toast.success('Kesempatan login berhasil direset!', {
               theme: 'dark',
               position: 'top-right',
             });
           }}
-          className={`w-full mt-2 py-2 rounded-lg font-semibold 
+          className={`w-full mt-2 py-2 rounded-lg font-semibold transition-all
             ${attempts === 0 
-              ? 'bg-green-500 text-white cursor-pointer' 
-              : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+              ? 'bg-green-500 text-white cursor-pointer hover:bg-green-600' 
+              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            }`}
         >
           Reset Kesempatan
         </button>
